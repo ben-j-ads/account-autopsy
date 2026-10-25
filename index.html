@@ -122,6 +122,14 @@
     ol.steps li span { color: var(--ink-muted); font-size: 0.88rem; display: block; }
 
     @media (prefers-color-scheme: dark) { h1 mark, .big span { background: linear-gradient(transparent 4%, var(--lime) 4%, var(--lime) 98%, transparent 98%); } }
+
+    /* polish: aligned inputs, chart label halo, next-step link */
+    .inputs, .adv { align-items: end; }
+    #chart .cap { paint-order: stroke; stroke: var(--paper-raised); stroke-width: 4px; stroke-linejoin: round; }
+    .next-step { border: 1px solid var(--rule); border-left: 4px solid var(--ink); background: var(--paper-raised); padding: 14px 16px; margin: 24px 0 0; }
+    .next-step .k { color: var(--ink-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+    .next-step a { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; text-transform: lowercase; }
+    .next-step p { margin: 4px 0 0; color: var(--ink-muted); font-size: 0.92rem; }
   </style>
 </head>
 <body>
@@ -167,6 +175,7 @@
       <p><b>Some questions are platform-specific.</b> The learning-phase question follows Meta's published guidance. Skip it, and subtract one from the bar, if you do not run Meta.</p>
     </section>
 
+    <section class="next-step"><div class="k">next</div><a href="https://which-test-can-i-run.benjads.com/">which test can i run</a><p>Find out which test your set-up allows.</p></section>
     <footer class="site-foot">
       <picture><source media="(prefers-color-scheme: dark)" srcset="logo/benjads-footnote-paper-transparent.svg"><img src="logo/benjads-footnote-olive-transparent.svg" alt="ben.j.ads"></picture>
       <p><span class="tag">1</span>Author's checklist of good practice drawn from effectiveness research and platform guidance. Marketing science, given away free, for people who spend money.</p>
@@ -295,7 +304,7 @@
     const DEFAULTS = Object.fromEntries(IDS.map((id) => [id, 0]));
 
     $('qs').innerHTML = GROUPS.map((g, gi) => `<div class="qgroup"><h2 class="section-h">${g.name}</h2>` +
-      ALL.filter((q) => q.gi === gi).map((q) => `<div class="q"><input type="checkbox" id="${q.id}"><label for="${q.id}">${q.text.replace(/'/g, '&#39;')}<span class="why">${q.why}</span></label></div>`).join('') + '</div>').join('');
+      ALL.filter((q) => q.gi === gi).map((q) => `<div class="q"><input autocomplete="off" type="checkbox" id="${q.id}"><label for="${q.id}">${q.text.replace(/'/g, '&#39;')}<span class="why">${q.why}</span></label></div>`).join('') + '</div>').join('');
 
     let last = null;
     function update() {
